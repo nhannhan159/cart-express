@@ -1,19 +1,19 @@
 'use strict';
 module.exports = {
-  up: function(queryInterface, Sequelize) {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('item', [
-      { name: 'Item 1', imageUrl: 'img1.png', price: 2000 },
-      { name: 'Item 2', imageUrl: 'img2.png', price: 3000 },
-      { name: 'Item 3', imageUrl: 'img3.png', price: 3500 },
-      { name: 'Item 4', imageUrl: 'img4.png', price: 4000 },
-      { name: 'Item 5', imageUrl: 'img5.png', price: 4200 },
-      { name: 'Item 6', imageUrl: 'img6.png', price: 5000 },
-      { name: 'Item 7', imageUrl: 'img7.png', price: 5100 },
-      { name: 'Item 8', imageUrl: 'img8.png', price: 6300 },
+      { name: 'Item 1', imageUrl: 'image1.jpg', price: 2000 },
+      { name: 'Item 2', imageUrl: 'image2.jpg', price: 3000 },
+      { name: 'Item 3', imageUrl: 'image3.jpg', price: 3500 },
+      { name: 'Item 4', imageUrl: 'image4.jpg', price: 4000 },
+      { name: 'Item 5', imageUrl: 'image5.jpg', price: 4200 },
+      { name: 'Item 6', imageUrl: 'image6.jpg', price: 5000 },
+      { name: 'Item 7', imageUrl: 'image7.jpg', price: 5100 },
+      { name: 'Item 8', imageUrl: 'image8.jpg', price: 6300 },
     ], {});
   },
 
-  down: function(queryInterface, Sequelize) {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('item', null, {});
   }
 };

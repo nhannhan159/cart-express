@@ -1,0 +1,17 @@
+class {
+    onCreate() {
+        this.state = {
+            mounted: false
+        };
+    }
+    onMount() {
+        this.state.mounted = true;
+    }
+}
+
+<div class="row">
+    <div class="col hide-on-small-only m1 l2"></div>
+    <div class="col s12 m7 l6"><item-list /></div>
+    <div class="col s12 m3 l2"><order-summary /></div>
+    <div class="col hide-on-small-only m1 l2"></div>
+</div>

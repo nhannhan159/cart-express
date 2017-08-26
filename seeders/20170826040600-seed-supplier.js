@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  up: function(queryInterface, Sequelize) {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('supplier', [
       { itemId: 1, source: 'postal1', destination: 'postal2', shippingFee: 150 },
       { itemId: 1, source: 'postal1', destination: 'postal3', shippingFee: 130 },
@@ -20,7 +20,7 @@ module.exports = {
     ], {});
   },
 
-  down: function(queryInterface, Sequelize) {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('supplier', null, {});
   }
 };

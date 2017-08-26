@@ -1,0 +1,15 @@
+class {
+    onCreate() {
+        this.state = { count:0 };
+    }
+    increment() {
+        this.state.count++;
+    }
+}
+
+<h3>My Shopping Cart</h3>
+<ul id="item-list">
+    <for(todo in data.todos)>
+        <item(todo) key="todo-${todo.id}"/>
+    </for>
+</ul>

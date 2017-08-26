@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    { "type": "js", "url": "https://code.jquery.com/jquery-3.2.1.min.js" },
+    { "type": "js", "url": "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js" },
+    { "type": "css", "url": "https://fonts.googleapis.com/icon?family=Material+Icons"},
+    { "type": "css", "url": "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" }
+  ]
+}
