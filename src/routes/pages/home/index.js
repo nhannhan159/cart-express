@@ -1,7 +1,6 @@
 'use strict';
-const models = require('../../../models');
 let template = require('./template.marko');
-let Item = models.Item;
+let Item = require('../../../models').Item;
 
 /* GET home page. */
 module.exports = (req, res, next) => {

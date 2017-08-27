@@ -20,6 +20,11 @@ module.exports = {
         type: Sequelize.DOUBLE,
         defaultValue: 0.0
       },
+      weight: {
+        allowNull: false,
+        type: Sequelize.DOUBLE,
+        defaultValue: 0.0
+      },
       createdAt: {
         allowNull: false,
         type: 'TIMESTAMP',

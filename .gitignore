@@ -63,3 +63,6 @@ typings/
 # Custom
 .idea
 dist
+
+# marko template
+*.marko.js

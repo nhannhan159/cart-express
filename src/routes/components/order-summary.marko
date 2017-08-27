@@ -1,67 +1,78 @@
 class {
-    onCreate() {
-        this.state = {
-            count:0
-        };
-    }
-    onMount() {
-        $('select').material_select();
-    }
+  onCreate() {
+    this.state = {
+      locations: [],
+      seletedLocation: "",
+      shippingFee: 0,
+      total: 0
+    };
+  }
+  onInput(input) {
+    this.state.shippingFee = input.shippingFee;
+    this.state.total = input.total;
+  }
+  onMount() {
+    this.getDeliveryLocations();
+    window.handleLocationChanged = this.handleLocationChanged.bind(this);
+  }
+  onUpdate() {
+    $("select").material_select();
+  }
+  handleLocationChanged(el) {
+    this.emit('change', $(el).val());
+  }
+  getDeliveryLocations() {
+    $.get('/api/location')
+      .done(data => {this.state.locations = data})
+      .fail(err => console.error(`Fetch error: ${err}`));
+  }
 }
 
 style.scss {
-    .summary-label {
-        padding-left: 0 !important;
+  .summary-label {
+    padding-left: 0 !important;
+  }
+  .summary-value {
+    text-align: right;
+  }
+  .info-container {
+    > div {
+      margin-top: 10px;
     }
-    .info-container {
-        > div {
-            margin-top: 10px;
-        }
+  }
+  #delivery-address {
+    .input-field {
+      margin-top: 0 !important;
+      input {
+        height: 20px !important;
+        margin-bottom: 0 !important;
+      }
     }
-    #delivery-address {
-        .input-field {
-            margin-top: 0 !important;
-            input {
-                height: 20px !important;
-                margin-bottom: 0 !important;
-            }
-        }
-    }
-    #checkout-btn {
-        width: 100%;
-    }
+  }
+  #checkout-btn {
+    width: 100%;
+  }
 }
 
-<h5>Order Summary</h5>
-<div class="divider"></div>
-<div class="row info-container">
-    <div class="col s12 m7 summary-label">
-        <label>Delivery Address</label>
-    </div>
-    <div class="col s12 m5" id="delivery-address">
-        <div class="input-field">
-            <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-            </select>
-        </div>
-    </div>
-    <div class="col s12 m7 summary-label">
-        <label>Total Shipping Fee</label>
-    </div>
-    <div class="col s12 m5">
-        <label>${state.count} USD</label>
-    </div>
-</div>
-<div class="divider"></div>
-<div class="row info-container">
-    <div class="col s12 m7 summary-label">
-        <label><b>Total</b> (Total payment amount):</label>
-    </div>
-    <div class="col s12 m5">
-        <label>${state.count} USD</label>
-    </div>
-</div>
-<button class="btn waves-effect waves-light" id="checkout-btn">CHECKOUT</button>
+div#order-summary
+  h5 -- Order Summary
+  div.divider
+  div.row.info-container
+    div.col.s12.m7.summary-label
+      label -- Delivery Address
+    div#delivery-address.col.s12.m5.summary-value
+      div.input-field
+        select value=state.seletedLocation onchange="handleLocationChanged(this)"
+          option value="" disabled selected=(state.seletedLocation === '') -- Choose address
+          option for(location in state.locations) selected=(state.seletedLocation === location.postalCode) value=`${location.postalCode}` -- ${location.postalCode}
+    div.col.s12.m7.summary-label
+      label -- Total Shipping Fee
+    div.col.s12.m5.summary-value
+      label -- ${state.shippingFee} USD
+  div.divider
+  div.row.info-container
+    div.col.s12.m7.summary-label
+      label -- <b>Total</b> (Total payment amount):
+    div.col.s12.m5.summary-value
+      label -- <b>${state.total} USD</b>
+  button#checkout-btn.btn.waves-effect.waves-light -- CHECKOUT

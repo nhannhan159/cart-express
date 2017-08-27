@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<lasso-page package-path="./browser.json"/>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Marko + Lasso</title>
+lasso-page package-path="./browser.json"
+html lang="en"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title -- Marko + Lasso
 
-        <!-- CSS includes -->
-        <lasso-head/>
-    </head>
-    <body>
-        <!-- Top-level UI component: -->
-        <await(items from input.itemsPromise)>
-            <shopping-cart({items: items})/>
-        </await>
+    <!-- CSS includes -->
+    lasso-head
+  body
+    <!-- Top-level UI component: -->
+    await(items from input.itemsPromise)
+      shopping-cart({items: items})
 
-        <!-- JS includes -->
-        <lasso-body/>
-        <browser-refresh/>
-    </body>
-</html>
+    <!-- JS includes -->
+    lasso-body
+    browser-refresh

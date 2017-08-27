@@ -1,6 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   let Supplier = sequelize.define('Supplier', {
+    itemId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'item',
+        key: 'id'
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
+    },
     source: {
       allowNull: false,
       type: DataTypes.STRING

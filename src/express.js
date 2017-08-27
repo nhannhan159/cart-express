@@ -9,7 +9,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 
-const itemApi = require('./routes/api/items');
+const cartApi = require('./routes/api/cart');
+const locationApi = require('./routes/api/location');
 const homePage = require('./routes/pages/home');
 const errorPage = require('./routes/pages/error');
 
@@ -41,8 +42,9 @@ app.use(cookieParser());
 app.use(compression());
 
 //register routes
+app.use('/api/cart', cartApi);
+app.use('/api/location', locationApi);
 app.use('/', homePage);
-app.use('/api/items', itemApi);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {

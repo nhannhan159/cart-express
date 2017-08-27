@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DOUBLE,
       defaultValue: 0.0
     },
+    weight: {
+      allowNull: false,
+      type: DataTypes.DOUBLE,
+      defaultValue: 0.0
+    },
     createdAt: {
       allowNull: false,
       type: 'TIMESTAMP',
