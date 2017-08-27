@@ -1,0 +1,50 @@
+class {
+    onCreate() {
+        this.state = { count:0 };
+    }
+    increment() {
+        this.state.count++;
+    }
+}
+
+style.scss {
+    .item-container {
+        height: 100px;
+        margin-bottom: 8px;
+    }
+    .item-image-container {
+        padding: 5px !important;
+        img {
+            width: 100%;
+            height: 90px;
+        }
+    }
+    .item-name {
+        > div:first-child {
+            margin-top: 30px;
+        }
+    }
+    .item-price {
+        > div:first-child {
+            margin-top: 30px;
+        }
+    }
+}
+
+<div class="card row item-container">
+    <div class="col s2 item-image-container">
+        <img src=`/images/${input.imageUrl}`>
+    </div>
+    <div class="col s6 item-name">
+        <div><b>${input.name}</b></div>
+        <div>${input.deliveryFrom}</div>
+    </div>
+    <div class="col s2 item-price">
+        <div><b>${input.price} USD</b></div>
+    </div>
+    <div class="col s2 item-quantity">
+        <div class="input-field">
+            <input id="last_name" type="number" min="0" value="0" class="validate">
+        </div>
+    </div>
+</div>

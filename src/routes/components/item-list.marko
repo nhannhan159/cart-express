@@ -1,0 +1,27 @@
+class {
+    onCreate() {
+        this.state = { count:0 };
+    }
+    increment() {
+        this.state.count++;
+    }
+}
+
+style.scss {
+    #item-list-header,
+    #item-list {
+        margin: 0
+    }
+}
+
+<div id="item-list-header" class="row">
+    <div class="col s2"></div>
+    <div class="col s6"></div>
+    <div class="col s2">ITEM PRICE</div>
+    <div class="col s2">QUANTITY</div>
+</div>
+<ul id="item-list">
+    <for(item in input.items)>
+        <li><item(item) /></li>
+    </for>
+</ul>

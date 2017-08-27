@@ -11,7 +11,9 @@
     </head>
     <body>
         <!-- Top-level UI component: -->
-        <app/>
+        <await(items from input.itemsPromise)>
+            <shopping-cart({items: items})/>
+        </await>
 
         <!-- JS includes -->
         <lasso-body/>

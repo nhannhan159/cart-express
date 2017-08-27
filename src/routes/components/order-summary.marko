@@ -1,0 +1,67 @@
+class {
+    onCreate() {
+        this.state = {
+            count:0
+        };
+    }
+    onMount() {
+        $('select').material_select();
+    }
+}
+
+style.scss {
+    .summary-label {
+        padding-left: 0 !important;
+    }
+    .info-container {
+        > div {
+            margin-top: 10px;
+        }
+    }
+    #delivery-address {
+        .input-field {
+            margin-top: 0 !important;
+            input {
+                height: 20px !important;
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+    #checkout-btn {
+        width: 100%;
+    }
+}
+
+<h5>Order Summary</h5>
+<div class="divider"></div>
+<div class="row info-container">
+    <div class="col s12 m7 summary-label">
+        <label>Delivery Address</label>
+    </div>
+    <div class="col s12 m5" id="delivery-address">
+        <div class="input-field">
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+        </div>
+    </div>
+    <div class="col s12 m7 summary-label">
+        <label>Total Shipping Fee</label>
+    </div>
+    <div class="col s12 m5">
+        <label>${state.count} USD</label>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="row info-container">
+    <div class="col s12 m7 summary-label">
+        <label><b>Total</b> (Total payment amount):</label>
+    </div>
+    <div class="col s12 m5">
+        <label>${state.count} USD</label>
+    </div>
+</div>
+<button class="btn waves-effect waves-light" id="checkout-btn">CHECKOUT</button>

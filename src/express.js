@@ -19,7 +19,7 @@ const app = express();
 //configure lasso to control how JS/CSS/etc. is delivered to the browser
 require('lasso').configure({
   plugins: [
-    'lasso-less', // Allow Less files to be rendered to CSS
+    'lasso-sass', // Allow Scss files to be rendered to CSS
     'lasso-marko' // Allow Marko templates to be compiled and transported to the browser
   ],
   outputDir: __dirname + '/static', // Place all generated JS/CSS/etc. files into the "static" dir
@@ -32,7 +32,8 @@ require('lasso').configure({
 app.use(require('lasso/middleware').serveStatic());
 
 //express app configs
-app.use(favicon(path.join(__dirname, 'assets', 'ico', 'favicon.png')));
+app.use(favicon(path.join(__dirname, 'public', 'ico', 'favicon.png')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,7 +42,7 @@ app.use(compression());
 
 //register routes
 app.use('/', homePage);
-app.use('/api/items', items);
+app.use('/api/items', itemApi);
 
 //catch 404 and forward to error handler
 app.use((req, res, next) => {
