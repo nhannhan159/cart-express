@@ -27,6 +27,8 @@ class {
           quantity: i.quantity
         }
       });
+
+    //only recalculate if at least 1 item selected 
     if (selectedItems.length > 0) {
       let requestData = {
         des: this.state.location,

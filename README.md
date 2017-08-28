@@ -14,7 +14,9 @@
 
 # Asumptions:
 
-	* Supplier will have all destination correspond to delivery address.
+	* Supplier will have all destination correspond to delivery address, if missing the recored had correct destination on database, shipping fee will not calculate for this item.
+	* Supplier will have unlimited items, prevent to get items from another suppliers.
+	* All items in one supplier will be shipped in only one round.
 	* Flat rate calculation for each item will base on weights of total selected quantity of this item.
 
 # Step to run:

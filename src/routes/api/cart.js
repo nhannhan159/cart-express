@@ -9,9 +9,13 @@ router.post('/calculate', wrapAsync(async (req, res, next) => {
   let body = req.body;
   var destination = body.des || '';
   let itemIds = body.items.map(item => item.id);
+
+  //fetch all selected item from db to get weight and price
   let itemsPromise = Item.findAll({
     where: { id: { $in: itemIds } }
   });
+
+  //fetch supplier for item by lowest deliveryFee
   let suppliersQuery =
       ' SELECT a.*'
     + ' FROM (SELECT * FROM supplier WHERE destination = :destination AND itemId IN (:itemIds)) a'
@@ -25,6 +29,8 @@ router.post('/calculate', wrapAsync(async (req, res, next) => {
       itemIds: itemIds
     }
   });
+
+  //wait for all done
   let [items, suppliers] = await Promise.all([itemsPromise, suppliersPromise]);
   items = items.map(item => {
     let newItem = Object.assign({}, item.dataValues);
@@ -48,6 +54,11 @@ router.post('/calculate', wrapAsync(async (req, res, next) => {
   });
 }));
 
+/**
+ * Sum all shipping fee and calculate flat rate if have
+ * @param {Array} items
+ * @return {Object} shippingFee and total
+ */
 function calculateCart(items) {
   let shippingFee, total;
   let cartValue = items.reduce((t, i) => t + i.price * i.quantity, 0);
