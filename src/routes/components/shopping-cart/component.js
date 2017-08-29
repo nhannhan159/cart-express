@@ -49,6 +49,7 @@ module.exports = class {
             item.deliveredFrom = itemDelivery.source;
           }
         });
+        this.setStateDirty('items');
         this.state.shippingFee = data.shippingFee;
         this.state.total = data.total;
       })

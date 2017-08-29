@@ -19,7 +19,9 @@ module.exports = class {
     $("select").material_select();
   }
   handleLocationChanged(el) {
-    this.emit('change', $(el).val());
+    let seletedLocation = $(el).val();
+    this.state.seletedLocation = seletedLocation;
+    this.emit('change', seletedLocation);
   }
   getDeliveryLocations() {
     fetch('/api/location')
