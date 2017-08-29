@@ -1,4 +1,4 @@
-class {
+module.exports = class {
   onCreate() {
     this.state = {
       items: [],
@@ -34,14 +34,15 @@ class {
         des: this.state.location,
         items: selectedItems
       }
-      $.ajax({
-        type: 'POST',
-        url: '/api/cart/calculate',
-        processData: false,
-        contentType: 'application/json',
-        data: JSON.stringify(requestData)
+      fetch('/api/cart/calculate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
       })
-      .done(data => {
+      .then(resp => resp.json())
+      .then(data => {
         this.state.items.forEach(item => {
           let itemDelivery = data.items.find(i => i.id === item.id);
           if (itemDelivery) {
@@ -51,18 +52,7 @@ class {
         this.state.shippingFee = data.shippingFee;
         this.state.total = data.total;
       })
-      .fail(err => console.error(`Post error: ${err}`));
+      .catch(err => console.error(`Post error: ${err}`));
     }
   }
 }
-
-div#shopping-cart.row
-  div.col.hide-on-med-and-down.l2
-  div.col.s12.l8.row
-    div.col.s12
-      cart-title
-    div.col.s12.m8
-      item-list({items: state.items}) on-change('handleQuantityChanged')
-    div.col.s12.m4
-      order-summary({shippingFee: state.shippingFee, total: state.total}) on-change('handleLocationChanged')
-  div.col.hide-on-med-and-down.l2

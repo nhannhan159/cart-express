@@ -1,0 +1,10 @@
+div#shopping-cart.row
+  div.col.hide-on-med-and-down.l2
+  div.col.s12.l8.row
+    div.col.s12
+      cart-title
+    div.col.s12.m8
+      item-list({items: state.items}) on-change('handleQuantityChanged')
+    div.col.s12.m4
+      order-summary({shippingFee: state.shippingFee, total: state.total}) on-change('handleLocationChanged')
+  div.col.hide-on-med-and-down.l2

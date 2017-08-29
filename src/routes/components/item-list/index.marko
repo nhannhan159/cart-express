@@ -1,0 +1,9 @@
+div#item-list
+  div#item-list-header.row
+    div.col.s2
+    div.col.s6
+    div.col.s2 -- ITEM PRICE
+    div.col.s2 -- QUANTITY
+  ul#item-list-content
+    li for(item in state.items | status-var=loop)
+      item(item) index=`${loop.getIndex()}` on-change("handleQuantityChanged")

@@ -1,0 +1,23 @@
+.summary-label {
+  padding-left: 0 !important;
+}
+.summary-value {
+  text-align: right;
+}
+.info-container {
+  > div {
+    margin-top: 10px;
+  }
+}
+#delivery-address {
+  .input-field {
+    margin-top: 0 !important;
+    input {
+      height: 20px !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+#checkout-btn {
+  width: 100%;
+}

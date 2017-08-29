@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+lasso-page package-path="./browser.json"
+html lang="en"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    <!-- Include page title -->
+    title
+      include(input.title)
+
+    <!-- CSS includes -->
+    lasso-head
+
+    <!-- Page CSS includes -->
+    include(input.styles)
+  body
+    <!-- Include page body -->
+    include(input.body)
+
+    <!-- JS includes -->
+    lasso-body
+    
+    <!-- Page JS includes -->
+    include(input.scripts)
+
+    <!-- Browser refresh plugin -->
+    browser-refresh

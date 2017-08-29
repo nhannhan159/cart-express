@@ -1,0 +1,11 @@
+div.card.row.item-container
+  div.col.s2.item-image-container
+    img src=`/images/${state.imageUrl}`
+  div.col.s6.item-name
+    div -- <b>${state.name}</b>
+    div if(state.deliveredFrom) -- Delivered from: ${state.deliveredFrom}
+  div.col.s2.item-price
+    div -- <b>${state.price} USD</b>
+  div.col.s2.item-quantity
+    div.input-field
+      input type="number" min="0" value=`${state.quantity}` on-change("handleQuantityChanged")

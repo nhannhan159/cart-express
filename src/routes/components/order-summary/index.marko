@@ -1,0 +1,22 @@
+div#order-summary
+  h5 -- Order Summary
+  div.divider
+  div.row.info-container
+    div.col.s12.m7.summary-label
+      label -- Delivery Address
+    div#delivery-address.col.s12.m5.summary-value
+      div.input-field
+        select value=state.seletedLocation onchange="handleLocationChanged(this)"
+          option value="" disabled selected=(state.seletedLocation === '') -- Choose address
+          option for(location in state.locations) selected=(state.seletedLocation === location.postalCode) value=`${location.postalCode}` -- ${location.postalCode}
+    div.col.s12.m7.summary-label
+      label -- Total Shipping Fee
+    div.col.s12.m5.summary-value
+      label -- ${state.shippingFee} USD
+  div.divider
+  div.row.info-container
+    div.col.s12.m7.summary-label
+      label -- <b>Total</b> (Total payment amount):
+    div.col.s12.m5.summary-value
+      label -- <b>${state.total} USD</b>
+  button#checkout-btn.btn.waves-effect.waves-light -- CHECKOUT
