@@ -8,29 +8,18 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compression = require('compression');
+const lasso = require('lasso');
+const lassoMiddleware = require('lasso/middleware');
+const lassoConfig = require('../config/lasso-config');
 
-const cartApi = require('./routes/api/cart');
-const locationApi = require('./routes/api/location');
-const homePage = require('./routes/pages/home');
-const errorPage = require('./routes/pages/error');
-
-const isProduction = process.env.NODE_ENV === 'production';
+const router = require('./routes');
 const app = express();
 
 //configure lasso to control how JS/CSS/etc. is delivered to the browser
-require('lasso').configure({
-  plugins: [
-    'lasso-sass', // Allow Scss files to be rendered to CSS
-    'lasso-marko' // Allow Marko templates to be compiled and transported to the browser
-  ],
-  outputDir: __dirname + '/static', // Place all generated JS/CSS/etc. files into the "static" dir
-  bundlingEnabled: isProduction, // Only enable bundling in production
-  minify: isProduction, // Only minify JS and CSS code in production
-  fingerprintsEnabled: isProduction, // Only add fingerprints to URLs in production
-});
+lasso.configure(lassoConfig);
 
 //allow all of the generated files under "static" to be served up by Express
-app.use(require('lasso/middleware').serveStatic());
+app.use(lassoMiddleware.serveStatic());
 
 //express app configs
 app.use(favicon(path.join(__dirname, 'public', 'ico', 'favicon.png')));
@@ -42,18 +31,6 @@ app.use(cookieParser());
 app.use(compression());
 
 //register routes
-app.use('/api/cart', cartApi);
-app.use('/api/location', locationApi);
-app.use('/', homePage);
-
-//catch 404 and forward to error handler
-app.use((req, res, next) => {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-//error handler
-app.use(errorPage);
+app.use(router);
 
 module.exports = app;
