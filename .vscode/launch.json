@@ -7,7 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch Program Linux",
+            "program": "${workspaceRoot}/src/index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program Windows",
             "program": "${workspaceRoot}\\src\\index.js"
         }
     ]
