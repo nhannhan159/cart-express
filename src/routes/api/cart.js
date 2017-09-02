@@ -6,8 +6,8 @@ let Supplier = require('../../models').Supplier;
 
 const router = new Router();
 
-router.post('/calculate', async (req, res, next) => {
-  let body = req.body;
+router.post('/calculate', async (ctx, next) => {
+  let body = ctx.request.body;
   var destination = body.des || '';
   let itemIds = body.items.map(item => item.id);
 
@@ -48,11 +48,11 @@ router.post('/calculate', async (req, res, next) => {
     return newItem;
   });
   let { shippingFee, total } = calculateCart(items);
-  res.send({
+  ctx.body = {
     items: items,
     shippingFee: shippingFee,
     total: total
-  });
+  };
 });
 
 /**

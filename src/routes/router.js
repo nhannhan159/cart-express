@@ -8,9 +8,9 @@ const errorPage = require('./pages/error');
 const router = new Router();
 
 //register routes
-router.use('/api/cart', cartApi.routes());
-router.use('/api/location', locationApi.routes());
-router.use('/', homePage);
+router.use('/api/cart', cartApi.routes(), cartApi.allowedMethods());
+router.use('/api/location', locationApi.routes(), locationApi.allowedMethods());
+router.get('/', homePage);
 
 //error handler
 router.use(errorPage);

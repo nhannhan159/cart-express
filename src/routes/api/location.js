@@ -4,9 +4,9 @@ let Location = require('../../models').Location;
 
 const router = new Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (ctx, next) => {
   let locations = await Location.findAll();
-  res.send(locations);
+  ctx.body = locations;
 });
 
 module.exports = router;
