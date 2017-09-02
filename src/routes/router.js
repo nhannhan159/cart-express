@@ -1,21 +1,16 @@
 'use strict';
-const router = require('express').Router();
+const Router = require('koa-router');
 const cartApi = require('./api/cart');
 const locationApi = require('./api/location');
 const homePage = require('./pages/home');
 const errorPage = require('./pages/error');
 
-//register routes
-router.use('/api/cart', cartApi);
-router.use('/api/location', locationApi);
-router.use('/', homePage);
+const router = new Router();
 
-//catch 404 and forward to error handler
-router.use((req, res, next) => {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+//register routes
+router.use('/api/cart', cartApi.routes());
+router.use('/api/location', locationApi.routes());
+router.use('/', homePage);
 
 //error handler
 router.use(errorPage);

@@ -1,11 +1,12 @@
 'use strict';
-const wrapAsync = require('../../utils/wrap-async');
-const router = require('express').Router();
+const Router = require('koa-router');
 let sequelize = require('../../models').sequelize;
 let Item = require('../../models').Item;
 let Supplier = require('../../models').Supplier;
 
-router.post('/calculate', wrapAsync(async (req, res, next) => {
+const router = new Router();
+
+router.post('/calculate', async (req, res, next) => {
   let body = req.body;
   var destination = body.des || '';
   let itemIds = body.items.map(item => item.id);
@@ -52,7 +53,7 @@ router.post('/calculate', wrapAsync(async (req, res, next) => {
     shippingFee: shippingFee,
     total: total
   });
-}));
+});
 
 /**
  * Sum all shipping fee and calculate flat rate if have
