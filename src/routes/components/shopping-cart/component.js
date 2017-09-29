@@ -21,39 +21,30 @@ module.exports = class {
   recalculateCart() {
     let selectedItems = this.state.items
       .filter(i => i.quantity > 0)
-      .map(i => {
-        return {
-          id: i.id,
-          quantity: i.quantity
+      .map(i => ({ id: i.id, quantity: i.quantity }));
+    let requestData = {
+      des: this.state.location,
+      items: selectedItems
+    }
+    fetch('/api/cart/calculate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.state.items.forEach(item => {
+        let itemDelivery = data.items.find(i => i.id === item.id);
+        if (itemDelivery) {
+          item.deliveredFrom = itemDelivery.source;
         }
       });
-
-    //only recalculate if at least 1 item selected 
-    if (selectedItems.length > 0) {
-      let requestData = {
-        des: this.state.location,
-        items: selectedItems
-      }
-      fetch('/api/cart/calculate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-      })
-      .then(resp => resp.json())
-      .then(data => {
-        this.state.items.forEach(item => {
-          let itemDelivery = data.items.find(i => i.id === item.id);
-          if (itemDelivery) {
-            item.deliveredFrom = itemDelivery.source;
-          }
-        });
-        this.setStateDirty('items');
-        this.state.shippingFee = data.shippingFee;
-        this.state.total = data.total;
-      })
-      .catch(err => console.error(`Post error: ${err}`));
-    }
+      this.setStateDirty('items');
+      this.state.shippingFee = data.shippingFee;
+      this.state.total = data.total;
+    })
+    .catch(err => console.error(`Post error: ${err}`));
   }
 }

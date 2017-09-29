@@ -13,7 +13,6 @@ module.exports = async (ctx, next) => {
 
     ctx.type = 'html';
     ctx.status = err.status || 500;
-    ctx.body = err.message;
     ctx.body = template.stream({
       stackTrace: stackTrace,
     });

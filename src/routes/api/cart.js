@@ -27,7 +27,7 @@ router.post('/calculate', async (ctx, next) => {
     type: sequelize.QueryTypes.SELECT,
     replacements: {
       destination: destination,
-      itemIds: itemIds
+      itemIds: itemIds.length > 0 ? itemIds : ''
     }
   });
 
