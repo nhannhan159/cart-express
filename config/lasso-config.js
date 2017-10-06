@@ -6,6 +6,14 @@ module.exports = {
     'lasso-sass', // Allow Scss files to be rendered to CSS
     'lasso-marko' // Allow Marko templates to be compiled and transported to the browser
   ],
+  transforms: [
+    {
+      transform: 'lasso-babel-transform',
+      config: {
+        extensions: ['.js', '.es6']
+      }
+    }
+  ],
   outputDir: 'src/public/static', // Place all generated JS/CSS/etc. files into the "public" dir
   bundlingEnabled: isProduction, // Only enable bundling in production
   minify: isProduction, // Only minify JS and CSS code in production

@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js --exec \"node -r dotenv/config\"",
+    "start": "node index.js",
     "db:migrate": "./node_modules/.bin/sequelize db:migrate --migrations-path=migrations/database",
     "db:seed": "./node_modules/.bin/sequelize db:seed:all --seeders-path=migrations/seeders"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "browser-refresh-taglib": "^1.1.0",
     "debug": "^3.0.1",
     "koa": "^2.3.0",
@@ -23,6 +25,7 @@
     "koa-session": "^5.5.0",
     "koa-static": "^4.0.1",
     "lasso": "^2.11.16",
+    "lasso-babel-transform": "^1.0.1",
     "lasso-marko": "^2.3.0",
     "lasso-sass": "^2.0.0",
     "marko": "^4.4.26",
@@ -34,11 +37,9 @@
     "sequelize-cli": "^2.8.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "dotenv": "^4.0.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1"
-  },
-  "engines": {
-    "node": ">=8.0.0"
   }
 }

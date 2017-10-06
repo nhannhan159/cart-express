@@ -1,4 +1,5 @@
-module.exports = class {
+'use strict';
+export default class {
   onCreate() {
     this.state = {
       items: [],

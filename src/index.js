@@ -4,9 +4,16 @@
  * Module dependencies.
  */
 'use strict';
-const app = require('./server');
-const http = require('http');
-const debug = require('debug')('http');
+import http        from 'http';
+import debug       from 'debug';
+import lasso       from 'lasso';
+import app         from './server';
+import lassoConfig from '../config/lasso-config';
+
+const debugHttp = debug('http');
+
+//configure lasso to control how JS/CSS/etc. is delivered to the browser
+lasso.configure(lassoConfig);
 
 /**
  * Get port from environment and store in Express.
@@ -79,5 +86,5 @@ function onListening() {
   let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  debugHttp('Listening on ' + bind);
 }

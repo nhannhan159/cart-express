@@ -1,10 +1,8 @@
 'use strict';
-const Router = require('koa-router');
-let sequelize = require('../../models').sequelize;
-let Item = require('../../models').Item;
-let Supplier = require('../../models').Supplier;
+import Router                from 'koa-router';
+import { AppSequelize, Item } from '../../models';
 
-const router = new Router();
+let router    = new Router();
 
 router.post('/calculate', async (ctx, next) => {
   let body = ctx.request.body;
@@ -23,8 +21,8 @@ router.post('/calculate', async (ctx, next) => {
     + ' LEFT OUTER JOIN (SELECT * FROM supplier WHERE destination = :destination AND itemId IN (:itemIds)) b'
     + '   ON a.itemId = b.itemId AND a.shippingFee > b.shippingFee'
     + ' WHERE b.itemId IS NULL';
-  let suppliersPromise = await sequelize.query(suppliersQuery, {
-    type: sequelize.QueryTypes.SELECT,
+  let suppliersPromise = await AppSequelize.query(suppliersQuery, {
+    type: AppSequelize.QueryTypes.SELECT,
     replacements: {
       destination: destination,
       itemIds: itemIds.length > 0 ? itemIds : ''
@@ -81,4 +79,4 @@ function calculateCart(items) {
   };
 }
 
-module.exports = router;
+export default router;
